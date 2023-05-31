@@ -4,7 +4,7 @@ export function NewTodoForm({ onSubmit }) {
   const [newItem, setNewItem] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (newItem === "") {
       setErrorMessage("The item cannot be empty.");
@@ -14,7 +14,11 @@ export function NewTodoForm({ onSubmit }) {
     onSubmit(newItem);
     setNewItem("");
     setErrorMessage("");
-  }
+  };
+
+  const handleChange = (e) => {
+    setNewItem(e.target.value);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="new-item-form">
@@ -22,7 +26,7 @@ export function NewTodoForm({ onSubmit }) {
         <label htmlFor="item">New Item</label>
         <input
           value={newItem}
-          onChange={(e) => setNewItem(e.target.value)}
+          onChange={handleChange}
           type="text"
           id="item"
         />
